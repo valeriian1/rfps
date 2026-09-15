@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="description"
+      content="Форма зворотного зв'язку LinguaHub: підбір рівня, співпраця, пропозиція чи повідомлення про помилку."
+    />
+    <title>Зворотній зв'язок — LinguaHub</title>
+  </head>
+  <body>
+    <header id="top">
+      <p><b>LinguaHub</b></p>
+
+      <nav aria-label="Головне меню сайту">
+        <ul>
+          <li><a href="index.html">Головна</a></li>
+          <li><a href="topics.html">Навчальні теми</a></li>
+          <li><a href="feedback.html">Зворотній зв'язок</a></li>
+        </ul>
+      </nav>
+
+      <form action="feedback.html">
+        <button type="submit">Перейти у власний кабінет</button>
+      </form>
+      <form action="feedback.html">
+        <button type="submit">Зареєструватись</button>
+      </form>
+    </header>
+
+    <hr />
+
+    <main>
+      <section id="intro">
+        <h1>Написати нам</h1>
+        <p>
+          Розкажіть, що вам потрібно, — ми обов'язково розглянемо ваше
+          звернення. Заповнення форми займе близько хвилини.
+        </p>
+      </section>
+
+      <hr />
+
+      <section id="form">
+        <h2>Форма звернення</h2>
+
+        <form action="#" method="post">
+          <fieldset>
+            <legend>Персональна інформація</legend>
+            <p>
+              <small
+                >Потрібна, щоб звернутися до вас на ім'я й підібрати
+                групу відповідного рівня.</small
+              >
+            </p>
+
+            <p>
+              <label for="fullname">1. Прізвище та ім'я *</label
+              ><br />
+              <input
+                type="text"
+                id="fullname"
+                name="fullname"
+                size="40"
+                placeholder="Назаренко Валерія"
+                required
+              />
+            </p>
+
+            <p>
+              <label for="email">2. E-mail *</label><br />
+              <small
+                >Сюди надішлемо відповідь. Розсилок без вашої згоди не
+                буде.</small
+              ><br />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                size="40"
+                placeholder="name@example.com"
+                required
+              />
+            </p>
+
+            <p>
+              <label for="age">3. Вік</label><br />
+              <small
+                >Щоб підібрати групу: підліткову чи дорослу.</small
+              ><br />
+              <input
+                type="number"
+                id="age"
+                name="age"
+                min="6"
+                max="100"
+                step="1"
+                placeholder="18"
+              />
+            </p>
+
+            <p>
+              <b>4. Чи вже вивчаєте мову *?</b><br />
+              <small
+                >Оберіть один варіант — підберемо групу за
+                рівнем.</small
+              >
+            </p>
+            <p>
+              <label
+                ><input
+                  type="radio"
+                  name="level"
+                  value="pro"
+                  required
+                />
+                так, я профі</label
+              ><br />
+              <label
+                ><input type="radio" name="level" value="basic" />
+                так, але знаю початки</label
+              ><br />
+              <label
+                ><input type="radio" name="level" value="planning" />
+                планую</label
+              ><br />
+              <label
+                ><input type="radio" name="level" value="no" />
+                ні</label
+              >
+            </p>
+          </fieldset>
+
+          <p>
+            <label for="purpose">5. Мета зворотнього зв'язку *</label
+            ><br />
+            <select id="purpose" name="purpose" required>
+              <option value="" selected disabled>
+                -- Оберіть мету --
+              </option>
+              <option value="cooperation">співпраця</option>
+              <option value="complaint">
+                скарга на неякісний контент
+              </option>
+              <option value="offer">пропозиція</option>
+              <option value="bug">наявність помилки</option>
+            </select>
+          </p>
+
+          <p>
+            <label for="details">6. Детально *</label><br />
+            <small
+              >Що конкретніше опишете ситуацію, то точнішою буде
+              відповідь. До 500 символів.</small
+            ><br />
+            <textarea
+              id="details"
+              name="details"
+              rows="8"
+              cols="60"
+              maxlength="500"
+              required
+              placeholder="Наприклад: хочу підготуватися до співбесіди англійською за три місяці"
+            ></textarea>
+          </p>
+
+          <p>
+            <label>
+              <input
+                type="checkbox"
+                name="agreement"
+                value="yes"
+                required
+              />
+              Погоджуюсь на обробку вказаних даних для відповіді на
+              звернення *
+            </label>
+          </p>
+
+          <p>
+            <button type="submit">Надіслати звернення</button>
+            <button type="reset">Очистити форму</button>
+          </p>
+        </form>
+      </section>
+
+      <aside>
+        <h2>Якщо питання термінове</h2>
+        <p>
+          Подзвоніть або напишіть на пошту — це швидше, ніж форма.
+        </p>
+        <address>
+          <a href="tel:+380441234567">+38 (044) 123-45-67</a><br />
+          <a href="mailto:hello@linguahub.ua">hello@linguahub.ua</a
+          ><br />
+          Київ, вул. Богдана Гаврилишина, 24, офіс 312
+        </address>
+        <p>Працюємо з понеділка по п'ятницю, 9:00–19:00.</p>
+
+        <p>Ще не обрали, з чого почати? Подивіться теми курсу.</p>
+        <form action="topics.html">
+          <button type="submit">Дивитися теми</button>
+        </form>
+        <form action="index.html">
+          <button type="submit">На головну</button>
+        </form>
+      </aside>
+    </main>
+
+    <hr />
+
+    <footer id="contacts">
+      <nav aria-label="Навігація у підвалі">
+        <ul>
+          <li><a href="index.html">Головна сторінка</a></li>
+          <li><a href="topics.html">Навчальні теми</a></li>
+          <li><a href="feedback.html">Зворотній зв'язок</a></li>
+        </ul>
+      </nav>
+      <p>© 2026 LinguaHub · <a href="#top">Нагору</a></p>
+    </footer>
+  </body>
+</html>
