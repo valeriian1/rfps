@@ -14,7 +14,12 @@
   </head>
   <body>
     <header id="top">
-      <p><b>LinguaHub</b></p>
+      <p>
+        <a href="index.html">
+          <img src="images/logo.jpg" alt="LinguaHub Logo" height="40" align="middle" />
+        </a>
+        <b>LinguaHub</b>
+      </p>
 
       <nav aria-label="Головне меню сайту">
         <ul>
@@ -49,20 +54,21 @@
             </p>
 
             <p>
-              <label for="fullname">1. Прізвище та ім'я *</label
+              <label for="fullname">1. Прізвище та ім'я*</label
               ><br />
               <input
                 type="text"
                 id="fullname"
                 name="fullname"
                 size="40"
+                maxlength="100"
                 placeholder="Назаренко Валерія"
                 required
               />
             </p>
 
             <p>
-              <label for="email">2. E-mail *</label><br />
+              <label for="email">2. E-mail*</label><br />
               <small
                 >Сюди надішлемо відповідь. Розсилок без вашої згоди не
                 буде.</small
@@ -80,7 +86,7 @@
             <p>
               <label for="age">3. Вік</label><br />
               <small
-                >Щоб підібрати групу: підліткову чи дорослу.</small
+                >Щоб ми підібрали для тебе рівень групи.</small
               ><br />
               <input
                 type="number"
@@ -94,10 +100,9 @@
             </p>
 
             <p>
-              <b>4. Чи вже вивчаєте мову *?</b><br />
+              4. Чи вже вивчаєте мову*?<br />
               <small
-                >Оберіть один варіант — підберемо групу за
-                рівнем.</small
+                >Оберіть один варіант.</small
               >
             </p>
             <p>
@@ -126,7 +131,7 @@
           </fieldset>
 
           <p>
-            <label for="purpose">5. Мета зворотнього зв'язку *</label
+            <label for="purpose">5. Мета зворотнього зв'язку*</label
             ><br />
             <select id="purpose" name="purpose" required>
               <option value="" selected disabled>
@@ -142,7 +147,7 @@
           </p>
 
           <p>
-            <label for="details">6. Детально *</label><br />
+            <label for="details">6. Детально</label><br />
             <small
               >Що конкретніше опишете ситуацію, то точнішою буде
               відповідь. До 500 символів.</small
@@ -153,7 +158,6 @@
               rows="8"
               cols="60"
               maxlength="500"
-              required
               placeholder="Наприклад: хочу підготуватися до співбесіди англійською за три місяці"
             ></textarea>
           </p>
@@ -166,8 +170,7 @@
                 value="yes"
                 required
               />
-              Погоджуюсь на обробку вказаних даних для відповіді на
-              звернення *
+              Я даю згоду на обробку моїх персональних даних*
             </label>
           </p>
 
@@ -182,6 +185,11 @@
     <hr />
 
     <footer id="contacts">
+      <p>Ми у соцмережах: 
+        <a href="https://www.instagram.com/" target="_blank">Instagram</a>, 
+        <a href="https://www.facebook.com/" target="_blank">Facebook</a>
+      </p>
+
       <nav aria-label="Навігація у підвалі">
         <ul>
           <li><a href="index.html">Головна сторінка</a></li>
