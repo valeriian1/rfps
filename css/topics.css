@@ -107,6 +107,66 @@ main > h1 {
   color: #b8860b;
 }
 
-main form {
-  margin: 3rem 0;
+.back-link {
+  margin: 2.5rem 0 1rem;
+}
+
+.back-link a {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--color-accent);
+  padding: 0.35rem 0;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.back-link a:hover {
+  transform: translateX(-4px);
+  color: #6a1b9a;
+}
+
+@media (max-width: 900px) {
+  main {
+    padding-top: 140px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .topics-list {
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (max-width: 540px) {
+  main {
+    padding-top: 215px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  main > h1 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .topics-list {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .topic-card {
+    padding: 1.15rem;
+  }
+
+  .topic-card img {
+    height: 180px;
+  }
+
+  .back-link {
+    margin: 1.5rem 0 0.5rem;
+  }
 }
