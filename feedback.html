@@ -11,12 +11,19 @@
       content="Форма зворотного зв'язку LinguaHub: підбір рівня, співпраця, пропозиція чи повідомлення про помилку."
     />
     <title>Зворотній зв'язок — LinguaHub</title>
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/feedback.css" />
+    <style>
+      .btn {
+        border-radius: 50px;
+      }
+    </style>
   </head>
   <body>
-    <header id="top">
+    <header class="site-header" id="top">
       <p>
         <a href="index.html">
-          <img src="images/logo.jpg" alt="LinguaHub Logo" height="40" align="middle" />
+          <img src="img/logo.svg" alt="LinguaHub Logo" height="42" />
         </a>
         <b>LinguaHub</b>
       </p>
@@ -29,12 +36,10 @@
         </ul>
       </nav>
 
-      <form action="feedback.html">
-        <button type="submit">Перейти у власний кабінет</button>
-      </form>
-      <form action="feedback.html">
-        <button type="submit">Зареєструватись</button>
-      </form>
+      <div class="header-actions">
+        <button type="button" class="btn">Перейти у власний кабінет</button>
+        <button type="button" class="btn">Зареєструватись</button>
+      </div>
     </header>
 
     <hr />
@@ -43,7 +48,7 @@
       <section id="form">
         <h2>Форма звернення</h2>
 
-        <form action="#" method="post">
+        <form action="#" method="post" class="feedback-form">
           <fieldset>
             <legend>Персональна інформація</legend>
             <p>
@@ -130,52 +135,56 @@
             </p>
           </fieldset>
 
-          <p>
-            <label for="purpose">5. Мета зворотнього зв'язку*</label
-            ><br />
-            <select id="purpose" name="purpose" required>
-              <option value="" selected disabled>
-                -- Оберіть мету --
-              </option>
-              <option value="cooperation">співпраця</option>
-              <option value="complaint">
-                скарга на неякісний контент
-              </option>
-              <option value="offer">пропозиція</option>
-              <option value="bug">наявність помилки</option>
-            </select>
-          </p>
+          <div class="details">
+            <p>
+              <label for="purpose">5. Мета зворотнього зв'язку*</label
+              ><br />
+              <select id="purpose" name="purpose" required>
+                <option value="" selected disabled>
+                  -- Оберіть мету --
+                </option>
+                <option value="cooperation">співпраця</option>
+                <option value="complaint">
+                  скарга на неякісний контент
+                </option>
+                <option value="offer">пропозиція</option>
+                <option value="bug">наявність помилки</option>
+              </select>
+            </p>
+
+            <p>
+              <label for="details">6. Детально</label><br />
+              <small
+                >Що конкретніше опишете ситуацію, то точнішою буде
+                відповідь. До 500 символів.</small
+              ><br />
+              <textarea
+                id="details"
+                name="details"
+                rows="8"
+                cols="60"
+                maxlength="500"
+                placeholder="Наприклад: хочу підготуватися до співбесіди англійською за три місяці"
+              ></textarea>
+            </p>
+          </div>
+
+          <div class="agreement">
+            <p>
+              <label>
+                <input
+                  type="checkbox"
+                  name="agreement"
+                  value="yes"
+                  required
+                />
+                Я даю згоду на обробку моїх персональних даних*
+              </label>
+            </p>
+          </div>
 
           <p>
-            <label for="details">6. Детально</label><br />
-            <small
-              >Що конкретніше опишете ситуацію, то точнішою буде
-              відповідь. До 500 символів.</small
-            ><br />
-            <textarea
-              id="details"
-              name="details"
-              rows="8"
-              cols="60"
-              maxlength="500"
-              placeholder="Наприклад: хочу підготуватися до співбесіди англійською за три місяці"
-            ></textarea>
-          </p>
-
-          <p>
-            <label>
-              <input
-                type="checkbox"
-                name="agreement"
-                value="yes"
-                required
-              />
-              Я даю згоду на обробку моїх персональних даних*
-            </label>
-          </p>
-
-          <p>
-            <button type="submit">Надіслати звернення</button>
+            <button type="submit" class="btn btn-submit">Надіслати звернення</button>
             <button type="reset">Очистити форму</button>
           </p>
         </form>
@@ -185,8 +194,8 @@
     <hr />
 
     <footer id="contacts">
-      <p>Ми у соцмережах: 
-        <a href="https://www.instagram.com/" target="_blank">Instagram</a>, 
+      <p>Ми у соцмережах:
+        <a href="https://www.instagram.com/" target="_blank">Instagram</a>,
         <a href="https://www.facebook.com/" target="_blank">Facebook</a>
       </p>
 
