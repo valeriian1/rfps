@@ -27,10 +27,10 @@ main > h1 {
 }
 
 .topic-card {
-  border-right: thin solid #4A148C;
-  border-left: 3px dashed #4A148C;
-  border-top: thin solid #4A148C;
-  border-bottom: thin solid #4A148C;
+  border-right: thin solid var(--color-accent);
+  border-left: 3px dashed var(--color-accent);
+  border-top: thin solid var(--color-accent);
+  border-bottom: thin solid var(--color-accent);
   border-radius: 12px;
   padding: 1.5rem;
   background-color: white;
@@ -103,7 +103,7 @@ main > h1 {
   font-weight: 500;
 }
 
-.lessons a:visited {
+main a:visited {
   color: #b8860b;
 }
 

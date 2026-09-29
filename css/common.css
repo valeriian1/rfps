@@ -23,6 +23,11 @@ body {
   overflow-x: hidden;
 }
 
+::selection {
+  background-color: var(--color-lime);
+  color: var(--color-accent);
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   color: var(--color-accent);
