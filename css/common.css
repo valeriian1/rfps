@@ -20,6 +20,7 @@ body {
   color: var(--color-text);
   font-family: var(--font-body);
   line-height: 1.65;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -151,12 +152,11 @@ nav > ul > li > a:hover {
 }
 
 #contacts {
-  max-width: 1200px;
-  margin: 3.5rem auto 0;
+  width: 100%;
+  margin: 3.5rem 0 0;
   padding: 3rem 2rem;
   background-color: white;
   border-top: 1px solid #e5e5e5;
-  border-radius: 8px 8px 0 0;
   box-sizing: border-box;
 }
 
@@ -231,6 +231,8 @@ nav > ul > li > a:hover {
 
   .header-actions .btn {
     margin-left: 0;
+    padding: 0.45rem 0.85rem;
+    font-size: 0.85rem;
   }
 
   .container {
@@ -243,7 +245,7 @@ nav > ul > li > a:hover {
   }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 620px) {
   .site-header {
     justify-content: center;
     gap: 0.75rem;

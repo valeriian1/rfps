@@ -21,12 +21,10 @@
   </head>
   <body>
     <header class="site-header" id="top">
-      <p>
-        <a href="index.html">
-          <img src="img/logo.svg" alt="LinguaHub Logo" height="42" />
-        </a>
-        <b>LinguaHub</b>
-      </p>
+      <a href="index.html">
+        <img src="img/logo.svg" alt="LinguaHub Logo" height="42" />
+      </a>
+      <p><b>LinguaHub</b></p>
 
       <nav aria-label="Головне меню сайту">
         <ul>
@@ -59,7 +57,7 @@
             </p>
 
             <p>
-              <label for="fullname">1. Прізвище та ім'я*</label
+              <label for="fullname">1. Прізвище та ім'я <span class="required">*</span></label
               ><br />
               <input
                 type="text"
@@ -73,7 +71,7 @@
             </p>
 
             <p>
-              <label for="email">2. E-mail*</label><br />
+              <label for="email">2. E-mail <span class="required">*</span></label><br />
               <small
                 >Сюди надішлемо відповідь. Розсилок без вашої згоди не
                 буде.</small
@@ -89,7 +87,7 @@
             </p>
 
             <p>
-              <label for="age">3. Вік</label><br />
+              <label for="age">3. Вік <span class="required">*</span></label><br />
               <small
                 >Щоб ми підібрали для тебе рівень групи.</small
               ><br />
@@ -101,11 +99,13 @@
                 max="100"
                 step="1"
                 placeholder="18"
+                required
               />
             </p>
 
             <p>
-              4. Чи вже вивчаєте мову*?<br />
+              <span class="label-title">4. Чи вже вивчаєте мову? <span class="required">*</span></span
+              ><br />
               <small
                 >Оберіть один варіант.</small
               >
@@ -137,7 +137,7 @@
 
           <div class="details">
             <p>
-              <label for="purpose">5. Мета зворотнього зв'язку*</label
+              <label for="purpose">5. Мета зворотнього зв'язку <span class="required">*</span></label
               ><br />
               <select id="purpose" name="purpose" required>
                 <option value="" selected disabled>
@@ -178,7 +178,7 @@
                   value="yes"
                   required
                 />
-                Я даю згоду на обробку моїх персональних даних*
+                Я даю згоду на обробку моїх персональних даних <span class="required">*</span>
               </label>
             </p>
           </div>
@@ -194,6 +194,18 @@
     <hr />
 
     <footer id="contacts">
+      <h2>Контакти</h2>
+      <address>
+        Київ, вул. Богдана Гаврилишина, 24, офіс 312<br />
+        Телефон: <a href="tel:+380441234567">+38 (044) 123-45-67</a
+        ><br />
+        Питання щодо навчання:
+        <a href="tel:+380671234567">+38 (067) 123-45-67</a><br />
+        Пошта:
+        <a href="mailto:hello@linguahub.ua">hello@linguahub.ua</a>
+      </address>
+      <p>Підтримка відповідає з понеділка по п'ятницю, 9:00–19:00.</p>
+
       <p>Ми у соцмережах:
         <a href="https://www.instagram.com/" target="_blank">Instagram</a>,
         <a href="https://www.facebook.com/" target="_blank">Facebook</a>
@@ -206,6 +218,7 @@
           <li><a href="feedback.html">Зворотній зв'язок</a></li>
         </ul>
       </nav>
+
       <p>© 2026 LinguaHub · <a href="#top">Нагору</a></p>
     </footer>
   </body>

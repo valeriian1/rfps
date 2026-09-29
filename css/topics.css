@@ -126,8 +126,12 @@ main > h1 {
 }
 
 @media (max-width: 900px) {
+  .site-header {
+    position: static;
+  }
+
   main {
-    padding-top: 140px;
+    padding-top: 2rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
@@ -141,7 +145,7 @@ main > h1 {
 
 @media (max-width: 540px) {
   main {
-    padding-top: 215px;
+    padding-top: 1.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
     margin-bottom: 2.5rem;
