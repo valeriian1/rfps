@@ -52,6 +52,7 @@ class FeedbackRegistry {
     const others = [];
 
     for (const user of this._users) {
+      
       const month = new Date(user.appealDate).getMonth() + 1;
 
       if (user.age <= 16 && month >= 1 && month <= 8) {
@@ -106,19 +107,32 @@ function runFeedbackTests() {
     registry.addUser(user);
   }
 
-  console.log("Initial feedback users:", registry.getUsers());
+  console.log("Початковий список користувачів зворотного зв'язку:");
+  console.table(registry.getUsers());
 
   const usersByMonthTime = registry.getUsersByMonthAndTime(5, "14:30");
-  console.log("Users by month 5 and time 14:30:", usersByMonthTime);
+  console.log("Користувачі за травень (місяць 5) о 14:30:");
+  console.table(usersByMonthTime);
 
   const minAgeUser = registry.getUserWithMinAge();
-  console.log("User with min age:", minAgeUser);
+  console.log("Користувач з мінімальним віком:");
+  console.table([minAgeUser]);
 
   const classifiedUsers = registry.classifyUsers();
-  console.log("Classified users:", classifiedUsers);
+  console.log("Школярі до початку навчального року:");
+  console.table(classifiedUsers.schoolchildrenBeforeYear);
+  console.log("Не школярі під час семестру:");
+  console.table(classifiedUsers.nonSchoolDuringSemester);
+  console.log("Інші користувачі:");
+  console.table(classifiedUsers.others);
 
   const sortedByEmail = registry.sortByEmailAsc();
-  console.log("Sorted by email asc:", sortedByEmail);
+  console.log("Відсортовані за email (зростання):");
+  console.table(sortedByEmail);
 }
 
-runFeedbackTests();
+if (typeof document !== "undefined") {
+  document.addEventListener("DOMContentLoaded", runFeedbackTests);
+} else {
+  runFeedbackTests();
+}

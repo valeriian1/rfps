@@ -125,6 +125,53 @@ main a:visited {
   color: #6a1b9a;
 }
 
+#topics-results {
+  margin-top: 3.5rem;
+  margin-bottom: 2.5rem;
+}
+
+#topics-results table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+#topics-results caption {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--color-accent);
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+#topics-results thead {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+#topics-results th {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+#topics-results td {
+  padding: 0.8rem 1rem;
+  border: 1px solid #e8e8e8;
+}
+
+#topics-results tbody tr:nth-child(even) {
+  background-color: #f9f7fc;
+}
+
+#topics-results tbody tr:hover {
+  background-color: #f1ecf7;
+}
+
 @media (max-width: 900px) {
   .site-header {
     position: static;
@@ -140,6 +187,17 @@ main a:visited {
     grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
     gap: 1.5rem;
     margin-bottom: 2.5rem;
+  }
+
+  #topics-results {
+    overflow-x: auto;
+  }
+
+  #topics-results table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 }
 

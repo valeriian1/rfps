@@ -205,14 +205,56 @@ function calcSimultaneousDuration(topicsList, ids) {
   });
 }
 
+function renderTopicsTable() {
+  if (typeof document === "undefined") return;
+  const container = document.getElementById("topics-table-container");
+  if (!container) return;
+
+  const table = document.createElement("table");
+  table.innerHTML = `
+    <caption>Зведена таблиця навчальних тем (Лабораторна робота №3)</caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Назва теми</th>
+        <th>Автор</th>
+        <th>Тип завдання</th>
+        <th>День 1</th>
+        <th>День 2</th>
+        <th>Тривалість</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${topics.map(t => `
+        <tr>
+          <td>${t.id}</td>
+          <td>${t.name}</td>
+          <td>${t.author}</td>
+          <td>${t.taskType}</td>
+          <td>${t.usersDay1}</td>
+          <td>${t.usersDay2}</td>
+          <td>${t.durationHours} год ${t.durationMinutes} хв</td>
+        </tr>
+      `).join("")}
+    </tbody>
+  `;
+  container.innerHTML = "";
+  container.appendChild(table);
+}
+
 function runTopicsTests() {
-  console.log("Initial topics:", topics);
+  console.log("Початковий масив тем:");
+  console.table(topics);
 
   const sortResult = sortTopicsByDuration(topics);
-  console.log("Sorted topics by duration:", sortResult);
+  console.log("Відсортовані теми за тривалістю:");
+  console.table(sortResult.sortedTopics);
+  console.log("Середня кількість користувачів за тривалістю:");
+  console.table(sortResult.averagesByDuration);
 
   const minUsersResult = findTopicWithMinUsersDay2(topics);
-  console.log("Topic with min users on day 2:", minUsersResult);
+  console.log("Тема з мінімальною кількістю користувачів на 2 день:");
+  console.table([minUsersResult]);
 
   const incompleteTopic = {
     id: 11,
@@ -220,7 +262,8 @@ function runTopicsTests() {
     author: "Богдан Шевчук"
   };
   const addIncompleteResult = addTopic(topics, incompleteTopic);
-  console.log("Add incomplete topic:", addIncompleteResult);
+  console.log("Додавання неповної теми:");
+  console.table(addIncompleteResult);
 
   const completeTopic = {
     id: 12,
@@ -233,13 +276,22 @@ function runTopicsTests() {
     durationMinutes: 50
   };
   const addCompleteResult = addTopic(topics, completeTopic);
-  console.log("Add complete topic:", addCompleteResult);
+  console.log("Додавання повної теми:");
+  console.table(addCompleteResult);
 
   const fewTopicsResult = calcSimultaneousDuration(topics, [1, 2, 3]);
-  console.log("Simultaneous duration (<= 3 topics):", fewTopicsResult);
+  console.log("Одночасне вивчення (<= 3 тем):");
+  console.table(fewTopicsResult);
 
   const manyTopicsResult = calcSimultaneousDuration(topics, [1, 2, 3, 5, 7]);
-  console.log("Simultaneous duration (> 3 topics, x1.5):", manyTopicsResult);
+  console.log("Одночасне вивчення (> 3 тем, x1.5):");
+  console.table(manyTopicsResult);
+
+  renderTopicsTable();
 }
 
-runTopicsTests();
+if (typeof document !== "undefined") {
+  document.addEventListener("DOMContentLoaded", runTopicsTests);
+} else {
+  runTopicsTests();
+}
