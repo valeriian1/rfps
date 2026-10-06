@@ -1,11 +1,6 @@
 .site-header {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
 }
-
 
 main {
   padding-top: 105px;
@@ -15,11 +10,6 @@ main {
     "info info";
   grid-template-columns: 2fr 1fr;
   gap: 3.5rem;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 2rem;
-  padding-right: 2rem;
   margin-bottom: 4rem;
   min-width: 0;
 }
@@ -124,46 +114,7 @@ aside p:last-child {
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
   margin-top: 1.5rem;
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-}
-
-caption {
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: var(--color-accent);
-  text-align: left;
-  margin-bottom: 1rem;
-}
-
-thead {
-  background-color: var(--color-accent);
-  color: white;
-}
-
-th {
-  padding: 1rem 1.15rem;
-  text-align: left;
-  font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-td {
-  padding: 0.85rem 1.15rem;
-  border: 1px solid #e8e8e8;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #f9f7fc;
-}
-
-tbody tr:hover {
-  background-color: #f1ecf7;
 }
 
 tfoot {
@@ -206,11 +157,6 @@ table + p a:hover {
 }
 
 @media (max-width: 900px) {
-  .site-header {
-    position: static;
-  }
-
-
   main {
     padding-top: 2rem;
     grid-template-areas:
@@ -244,22 +190,11 @@ table + p a:hover {
   .lang-info:hover {
     transform: none;
   }
-
-  table {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    white-space: nowrap;
-  }
 }
 
 @media (max-width: 540px) {
   main {
     padding-top: 1.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
     gap: 2rem;
     margin-bottom: 2.5rem;
   }

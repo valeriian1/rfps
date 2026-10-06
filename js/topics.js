@@ -286,8 +286,6 @@ function runTopicsTests() {
   const manyTopicsResult = calcSimultaneousDuration(topics, [1, 2, 3, 5, 7]);
   console.log("Одночасне вивчення (> 3 тем, x1.5):");
   console.table(manyTopicsResult);
-
-  renderTopicsTable();
 }
 
 if (typeof document !== "undefined") {

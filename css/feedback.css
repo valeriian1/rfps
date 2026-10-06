@@ -6,10 +6,6 @@ body {
 
 .site-header {
   position: sticky;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
   display: flex;
   align-items: center;
 }
@@ -59,14 +55,18 @@ main > section > h2 {
   width: 100%;
 }
 
-fieldset {
+fieldset,
+.details {
   width: 100%;
-  order: 1;
   padding: 2.25rem;
-  border: 1px solid #d4c5e6;
   border-radius: 12px;
   background-color: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+fieldset {
+  order: 1;
+  border: 1px solid #d4c5e6;
 }
 
 legend {
@@ -77,13 +77,8 @@ legend {
 }
 
 .details {
-  width: 100%;
   order: 2;
-  background-color: white;
-  padding: 2.25rem;
   border: 1px solid #e5e5e5;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
 }
 
 fieldset p, .details p {
@@ -131,7 +126,6 @@ textarea {
   border-radius: 8px;
   font-family: var(--font-body);
   font-size: 1rem;
-  box-sizing: border-box;
   background-color: #fafafa;
   transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
@@ -250,10 +244,6 @@ textarea:not(:focus):user-invalid {
 }
 
 @media (max-width: 900px) {
-  .site-header {
-    position: static;
-  }
-
   main {
     padding: 2rem 1.5rem 3rem;
   }

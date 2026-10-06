@@ -47,13 +47,11 @@ a[href*="tel"] {
   font-weight: bold;
 }
 
-hr {
-  border: 0;
-  border-top: 1px solid #e5e5e5;
-  margin: 2.5rem 0;
-}
-
 .site-header {
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   background-color: var(--color-accent);
   color: white;
   padding: 0.85rem 2rem;
@@ -99,7 +97,6 @@ nav > ul > li {
 }
 
 nav > ul > li > a {
-  color: white;
   font-weight: 500;
   transition: opacity 0.2s;
 }
@@ -148,12 +145,16 @@ nav > ul > li > a:hover {
 
 .header-actions .btn {
   margin-left: 0.75rem;
+  padding: 0.4rem 1.05rem;
+  font-size: 0.88rem;
+  line-height: 1.2;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 #contacts {
@@ -162,7 +163,6 @@ nav > ul > li > a:hover {
   padding: 3rem 2rem;
   background-color: white;
   border-top: 1px solid #e5e5e5;
-  box-sizing: border-box;
 }
 
 #contacts address {
@@ -179,8 +179,51 @@ nav > ul > li > a:hover {
   padding: 0;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+caption {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--color-accent);
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+thead {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+th {
+  padding: 0.95rem 1.15rem;
+  text-align: left;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+td {
+  padding: 0.85rem 1.15rem;
+  border: 1px solid #e8e8e8;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f7fc;
+}
+
+tbody tr:hover {
+  background-color: #f1ecf7;
+}
+
 @media (max-width: 900px) {
   .site-header {
+    position: static;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -241,12 +284,22 @@ nav > ul > li > a:hover {
   }
 
   .container {
-    padding: 0 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   #contacts {
     padding: 2.25rem 1.5rem;
     margin-top: 2.5rem;
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
   }
 }
 
@@ -290,7 +343,8 @@ nav > ul > li > a:hover {
   }
 
   .container {
-    padding: 0 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   #contacts {
