@@ -157,6 +157,10 @@ table + p a:hover {
 }
 
 @media (max-width: 900px) {
+  .site-header {
+    position: static;
+  }
+
   main {
     padding-top: 2rem;
     grid-template-areas:
@@ -219,5 +223,55 @@ table + p a:hover {
 
   th, td {
     padding: 0.65rem 0.75rem;
+  }
+}
+
+.rules-dialog {
+  max-width: 34rem;
+  width: calc(100% - 2rem);
+  margin: auto;
+  padding: 2rem;
+  border: none;
+  border-top: 6px solid var(--color-lime);
+  border-radius: 12px;
+  background-color: white;
+  color: var(--color-text);
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.3);
+}
+
+.rules-dialog::backdrop {
+  background-color: rgba(31, 27, 36, 0.6);
+  backdrop-filter: blur(3px);
+}
+
+.rules-dialog h2::before {
+  content: "🏆 ";
+}
+
+.rules-dialog ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.rules-dialog li {
+  margin-bottom: 0.6rem;
+}
+
+.rules-dialog form {
+  text-align: right;
+}
+
+.night-darken {
+  --night-overlay: rgba(0, 0, 0, 0.5);
+  background-image: linear-gradient(var(--night-overlay), var(--night-overlay));
+}
+
+@media (max-width: 540px) {
+  .rules-dialog {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .rules-dialog form {
+    text-align: center;
   }
 }

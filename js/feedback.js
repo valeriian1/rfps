@@ -1,3 +1,13 @@
+const SCHOOL_AGE_LIMIT = 16;
+const SCHOOL_YEAR_START_MONTH = 9;
+const SEMESTER_MONTHS = [2, 3, 4, 5, 9, 10, 11, 12];
+
+const USER_CLASSES = {
+  schoolchildrenBeforeYear: "Школярі до початку навчального року",
+  nonSchoolDuringSemester: "Не школярі впродовж семестру",
+  others: "Інші"
+};
+
 class FeedbackUser {
   constructor(lastName, firstName, age, email, purpose, appealDate, appealTime) {
     this.lastName = lastName;
@@ -7,6 +17,14 @@ class FeedbackUser {
     this.purpose = purpose;
     this.appealDate = appealDate;
     this.appealTime = appealTime;
+  }
+
+  get appealMonth() {
+    return new Date(this.appealDate).getMonth() + 1;
+  }
+
+  get isSchoolchild() {
+    return this.age < SCHOOL_AGE_LIMIT;
   }
 }
 
@@ -24,10 +42,7 @@ class FeedbackRegistry {
   }
 
   getUsersByMonthAndTime(month, time) {
-    return this._users.filter(user => {
-      const appealMonth = new Date(user.appealDate).getMonth() + 1;
-      return appealMonth === month && user.appealTime === time;
-    });
+    return this._users.filter(user => user.appealMonth === month && user.appealTime === time);
   }
 
   getUserWithMinAge() {
@@ -35,55 +50,31 @@ class FeedbackRegistry {
       return null;
     }
 
-    const minUser = this._users.reduce((min, current) => {
-      return current.age < min.age ? current : min;
-    }, this._users[0]);
+    const { age, email, appealDate } = findMinBy(this._users, user => user.age);
+    return { age, email, appealDate };
+  }
 
-    return {
-      age: minUser.age,
-      email: minUser.email,
-      appealDate: minUser.appealDate
-    };
+  _getUserClass(user) {
+    if (user.isSchoolchild && user.appealMonth < SCHOOL_YEAR_START_MONTH) {
+      return "schoolchildrenBeforeYear";
+    }
+    if (!user.isSchoolchild && SEMESTER_MONTHS.includes(user.appealMonth)) {
+      return "nonSchoolDuringSemester";
+    }
+    return "others";
   }
 
   classifyUsers() {
-    const schoolchildrenBeforeYear = [];
-    const nonSchoolDuringSemester = [];
-    const others = [];
-
-    for (const user of this._users) {
-      
-      const month = new Date(user.appealDate).getMonth() + 1;
-
-      if (user.age <= 16 && month >= 1 && month <= 8) {
-        schoolchildrenBeforeYear.push(user);
-      } else if (
-        user.age > 16 &&
-        ((month >= 9 && month <= 12) || (month >= 2 && month <= 5))
-      ) {
-        nonSchoolDuringSemester.push(user);
-      } else {
-        others.push(user);
-      }
-    }
-
-    return {
-      schoolchildrenBeforeYear,
-      schoolchildrenBeforeYearCount: schoolchildrenBeforeYear.length,
-      nonSchoolDuringSemester,
-      nonSchoolDuringSemesterCount: nonSchoolDuringSemester.length,
-      others,
-      othersCount: others.length
-    };
+    return Object.entries(USER_CLASSES).map(([key, title]) => {
+      const users = this._users.filter(user => this._getUserClass(user) === key);
+      return { title, users, count: users.length };
+    });
   }
 
   sortByEmailAsc() {
     return [...this._users]
-      .sort((a, b) => a.email.localeCompare(b.email, "uk"))
-      .map(user => ({
-        email: user.email,
-        purpose: user.purpose
-      }));
+      .sort((a, b) => compareText(a.email, b.email))
+      .map(({ email, purpose }) => ({ email, purpose }));
   }
 }
 
@@ -103,36 +94,17 @@ function runFeedbackTests() {
     new FeedbackUser("Лисенко", "Роман", 10, "r.lysenko@i.ua", "доступ до платформи", "2026-02-14", "14:30")
   ];
 
-  for (const user of initialUsers) {
-    registry.addUser(user);
-  }
+  initialUsers.forEach(user => registry.addUser(user));
 
-  console.log("Початковий список користувачів зворотного зв'язку:");
-  console.table(registry.getUsers());
+  logTable("Початковий список користувачів зворотного зв'язку:", registry.getUsers());
+  logTable("Користувачі за травень (місяць 5) о 14:30:", registry.getUsersByMonthAndTime(5, "14:30"));
+  logTable("Користувач з мінімальним віком:", [registry.getUserWithMinAge()]);
 
-  const usersByMonthTime = registry.getUsersByMonthAndTime(5, "14:30");
-  console.log("Користувачі за травень (місяць 5) о 14:30:");
-  console.table(usersByMonthTime);
+  const userClasses = registry.classifyUsers();
+  userClasses.forEach(({ title, users }) => logTable(`${title}:`, users));
+  logTable("Кількість користувачів у кожному класі:", userClasses.map(({ title, count }) => ({ title, count })));
 
-  const minAgeUser = registry.getUserWithMinAge();
-  console.log("Користувач з мінімальним віком:");
-  console.table([minAgeUser]);
-
-  const classifiedUsers = registry.classifyUsers();
-  console.log("Школярі до початку навчального року:");
-  console.table(classifiedUsers.schoolchildrenBeforeYear);
-  console.log("Не школярі під час семестру:");
-  console.table(classifiedUsers.nonSchoolDuringSemester);
-  console.log("Інші користувачі:");
-  console.table(classifiedUsers.others);
-
-  const sortedByEmail = registry.sortByEmailAsc();
-  console.log("Відсортовані за email (зростання):");
-  console.table(sortedByEmail);
+  logTable("Відсортовані за email (зростання):", registry.sortByEmailAsc());
 }
 
-if (typeof document !== "undefined") {
-  document.addEventListener("DOMContentLoaded", runFeedbackTests);
-} else {
-  runFeedbackTests();
-}
+runFeedbackTests();

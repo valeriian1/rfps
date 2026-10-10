@@ -101,169 +101,96 @@ const topics = [
   }
 ];
 
+const TOPIC_FIELDS = Object.keys(topics[0]);
+const MINUTES_IN_HOUR = 60;
+const MAX_TOPICS_WITHOUT_SLOWDOWN = 3;
+const SLOWDOWN_FACTOR = 1.5;
+
+function getTotalMinutes(topic) {
+  return topic.durationHours * MINUTES_IN_HOUR + topic.durationMinutes;
+}
+
+function splitMinutes(totalMinutes) {
+  const roundedMinutes = Math.round(totalMinutes);
+  return {
+    hours: Math.floor(roundedMinutes / MINUTES_IN_HOUR),
+    minutes: roundedMinutes % MINUTES_IN_HOUR
+  };
+}
+
 function sortTopicsByDuration(topicsList) {
-  const sortedTopics = [...topicsList].sort((a, b) => {
-    const totalMinutesA = a.durationHours * 60 + a.durationMinutes;
-    const totalMinutesB = b.durationHours * 60 + b.durationMinutes;
-    return totalMinutesA - totalMinutesB;
-  });
+  const sortedTopics = [...topicsList].sort((a, b) => getTotalMinutes(a) - getTotalMinutes(b));
 
-  const durationGroups = {};
+  const durationGroups = new Map();
   for (const topic of sortedTopics) {
-    const minutes = topic.durationHours * 60 + topic.durationMinutes;
-    if (!durationGroups[minutes]) {
-      durationGroups[minutes] = [];
+    const minutes = getTotalMinutes(topic);
+    if (!durationGroups.has(minutes)) {
+      durationGroups.set(minutes, []);
     }
-    durationGroups[minutes].push(topic);
+    durationGroups.get(minutes).push(topic);
   }
 
-  const averagesByDuration = [];
-  for (const [minutes, group] of Object.entries(durationGroups)) {
-    if (group.length > 1) {
-      const sumUsers = group.reduce((sum, item) => sum + item.usersDay1 + item.usersDay2, 0);
-      const averageUsers = sumUsers / group.length;
-      averagesByDuration.push({
-        totalMinutes: Number(minutes),
-        averageUsers: Number(averageUsers.toFixed(2)),
-        topics: group.map(item => item.name)
-      });
-    }
-  }
+  const averagesByDuration = [...durationGroups].map(([minutes, group]) => {
+    const sumUsers = group.reduce((sum, item) => sum + item.usersDay1 + item.usersDay2, 0);
+    return {
+      totalMinutes: minutes,
+      averageUsers: Number((sumUsers / group.length).toFixed(2)),
+      topics: group.map(item => item.name)
+    };
+  });
 
   return { sortedTopics, averagesByDuration };
 }
 
 function findTopicWithMinUsersDay2(topicsList) {
-  const minTopic = topicsList.reduce((min, item) => {
-    return item.usersDay2 < min.usersDay2 ? item : min;
-  }, topicsList[0]);
-
-  return {
-    id: minTopic.id,
-    name: minTopic.name,
-    usersDay2: minTopic.usersDay2
-  };
+  const { id, name, usersDay2 } = findMinBy(topicsList, item => item.usersDay2);
+  return { id, name, usersDay2 };
 }
 
 function addTopic(topicsList, newTopic) {
-  const requiredFields = [
-    "id",
-    "name",
-    "author",
-    "taskType",
-    "usersDay1",
-    "usersDay2",
-    "durationHours",
-    "durationMinutes"
-  ];
-
-  const hasMissingFields = requiredFields.some(field => newTopic[field] === undefined);
+  const hasMissingFields = TOPIC_FIELDS.some(field => isEmptyValue(newTopic[field]));
 
   if (hasMissingFields) {
     return [newTopic, ...topicsList];
   }
 
-  const sortedByAuthor = [...topicsList].sort((a, b) => {
-    return a.author.localeCompare(b.author, "uk");
-  });
+  const sortedByAuthor = [...topicsList].sort((a, b) => compareText(a.author, b.author));
+  const targetIndex = sortedByAuthor.findIndex(item => compareText(newTopic.author, item.author) < 0);
+  const insertIndex = targetIndex === -1 ? sortedByAuthor.length : targetIndex;
 
-  const targetIndex = sortedByAuthor.findIndex(item => {
-    return newTopic.author.localeCompare(item.author, "uk") < 0;
-  });
-
-  if (targetIndex === -1) {
-    sortedByAuthor.push(newTopic);
-  } else {
-    sortedByAuthor.splice(targetIndex, 0, newTopic);
-  }
-
+  sortedByAuthor.splice(insertIndex, 0, newTopic);
   return sortedByAuthor;
 }
 
 function calcSimultaneousDuration(topicsList, ids) {
   const selectedTopics = topicsList.filter(item => ids.includes(item.id));
-  const isMultiplied = selectedTopics.length > 3;
+  const factor = selectedTopics.length > MAX_TOPICS_WITHOUT_SLOWDOWN ? SLOWDOWN_FACTOR : 1;
 
   return selectedTopics.map(item => {
-    if (!isMultiplied) {
-      return {
-        name: item.name,
-        newDurationHours: item.durationHours,
-        newDurationMinutes: item.durationMinutes
-      };
-    }
-
-    const totalMinutes = (item.durationHours * 60 + item.durationMinutes) * 1.5;
-    const newDurationHours = Math.floor(totalMinutes / 60);
-    const newDurationMinutes = Math.round(totalMinutes % 60);
-
+    const { hours, minutes } = splitMinutes(getTotalMinutes(item) * factor);
     return {
       name: item.name,
-      newDurationHours,
-      newDurationMinutes
+      newDurationHours: hours,
+      newDurationMinutes: minutes
     };
   });
 }
 
-function renderTopicsTable() {
-  if (typeof document === "undefined") return;
-  const container = document.getElementById("topics-table-container");
-  if (!container) return;
-
-  const table = document.createElement("table");
-  table.innerHTML = `
-    <caption>Зведена таблиця навчальних тем (Лабораторна робота №3)</caption>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Назва теми</th>
-        <th>Автор</th>
-        <th>Тип завдання</th>
-        <th>День 1</th>
-        <th>День 2</th>
-        <th>Тривалість</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${topics.map(t => `
-        <tr>
-          <td>${t.id}</td>
-          <td>${t.name}</td>
-          <td>${t.author}</td>
-          <td>${t.taskType}</td>
-          <td>${t.usersDay1}</td>
-          <td>${t.usersDay2}</td>
-          <td>${t.durationHours} год ${t.durationMinutes} хв</td>
-        </tr>
-      `).join("")}
-    </tbody>
-  `;
-  container.innerHTML = "";
-  container.appendChild(table);
-}
-
 function runTopicsTests() {
-  console.log("Початковий масив тем:");
-  console.table(topics);
+  logTable("Початковий масив тем:", topics);
 
   const sortResult = sortTopicsByDuration(topics);
-  console.log("Відсортовані теми за тривалістю:");
-  console.table(sortResult.sortedTopics);
-  console.log("Середня кількість користувачів за тривалістю:");
-  console.table(sortResult.averagesByDuration);
+  logTable("Відсортовані теми за тривалістю:", sortResult.sortedTopics);
+  logTable("Середня кількість користувачів за тривалістю:", sortResult.averagesByDuration);
 
-  const minUsersResult = findTopicWithMinUsersDay2(topics);
-  console.log("Тема з мінімальною кількістю користувачів на 2 день:");
-  console.table([minUsersResult]);
+  logTable("Тема з мінімальною кількістю користувачів на 2 день:", [findTopicWithMinUsersDay2(topics)]);
 
   const incompleteTopic = {
     id: 11,
     name: "Irregular Verbs",
     author: "Богдан Шевчук"
   };
-  const addIncompleteResult = addTopic(topics, incompleteTopic);
-  console.log("Додавання неповної теми:");
-  console.table(addIncompleteResult);
+  logTable("Додавання неповної теми:", addTopic(topics, incompleteTopic));
 
   const completeTopic = {
     id: 12,
@@ -275,21 +202,16 @@ function runTopicsTests() {
     durationHours: 0,
     durationMinutes: 50
   };
-  const addCompleteResult = addTopic(topics, completeTopic);
-  console.log("Додавання повної теми:");
-  console.table(addCompleteResult);
+  logTable("Додавання повної теми:", addTopic(topics, completeTopic));
 
-  const fewTopicsResult = calcSimultaneousDuration(topics, [1, 2, 3]);
-  console.log("Одночасне вивчення (<= 3 тем):");
-  console.table(fewTopicsResult);
-
-  const manyTopicsResult = calcSimultaneousDuration(topics, [1, 2, 3, 5, 7]);
-  console.log("Одночасне вивчення (> 3 тем, x1.5):");
-  console.table(manyTopicsResult);
+  logTable(
+    `Одночасне вивчення (<= ${MAX_TOPICS_WITHOUT_SLOWDOWN} тем):`,
+    calcSimultaneousDuration(topics, [1, 2, 3])
+  );
+  logTable(
+    `Одночасне вивчення (> ${MAX_TOPICS_WITHOUT_SLOWDOWN} тем, x${SLOWDOWN_FACTOR}):`,
+    calcSimultaneousDuration(topics, [1, 2, 3, 5, 7])
+  );
 }
 
-if (typeof document !== "undefined") {
-  document.addEventListener("DOMContentLoaded", runTopicsTests);
-} else {
-  runTopicsTests();
-}
+runTopicsTests();

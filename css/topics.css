@@ -7,8 +7,108 @@ main {
   margin-bottom: 4rem;
 }
 
-main > h1 {
+main h1 {
   margin-bottom: 2.5rem;
+}
+
+.topics-layout {
+  display: grid;
+  grid-template-columns: 18rem minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.topics-accordion {
+  position: sticky;
+  top: 90px;
+  background-color: white;
+  border: 1px solid #e0d6ec;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.topics-accordion h2 {
+  font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+}
+
+.accordion-item + .accordion-item {
+  border-top: 1px solid #f0f0f0;
+}
+
+.accordion-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0;
+  background: none;
+  border: none;
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.accordion-trigger::after {
+  content: "+";
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: transform 0.3s;
+}
+
+.accordion-item.is-open .accordion-trigger::after {
+  transform: rotate(45deg);
+}
+
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s;
+}
+
+.accordion-item.is-open .accordion-panel {
+  grid-template-rows: 1fr;
+}
+
+.accordion-panel > div {
+  overflow: hidden;
+  font-size: 0.92rem;
+}
+
+.accordion-panel p {
+  margin-bottom: 0.8rem;
+}
+
+.topic-search {
+  margin-bottom: 2rem;
+}
+
+.topic-search label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.topic-search input {
+  width: 100%;
+  max-width: 28rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.topic-search input:focus {
+  border-color: var(--color-accent);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 20, 140, 0.15);
 }
 
 .topics-list {
@@ -28,6 +128,10 @@ main > h1 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.topic-card[hidden] {
+  display: none;
 }
 
 .topic-card img {
@@ -116,8 +220,21 @@ main a:visited {
 }
 
 @media (max-width: 900px) {
+  .site-header {
+    position: static;
+  }
+
   main {
     padding-top: 2rem;
+  }
+
+  .topics-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .topics-accordion {
+    position: static;
   }
 
   .topics-list {
@@ -133,7 +250,7 @@ main a:visited {
     margin-bottom: 2.5rem;
   }
 
-  main > h1 {
+  main h1 {
     font-size: 1.75rem;
     margin-bottom: 1.5rem;
   }

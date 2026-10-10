@@ -158,14 +158,19 @@
                 >Що конкретніше опишете ситуацію, то точнішою буде
                 відповідь. До 500 символів.</small
               ><br />
-              <textarea
-                id="details"
-                name="details"
-                rows="8"
-                cols="60"
-                maxlength="500"
-                placeholder="Наприклад: хочу підготуватися до співбесіди англійською за три місяці"
-              ></textarea>
+              <span class="details-field">
+                <textarea
+                  id="details"
+                  name="details"
+                  rows="8"
+                  cols="60"
+                  maxlength="500"
+                  placeholder="Наприклад: хочу підготуватися до співбесіди англійською за три місяці"
+                ></textarea>
+                <span class="tooltip">
+                  Ваша думка для нас важлива! Конкретизуйте мету звернення, будь ласка.
+                </span>
+              </span>
             </p>
           </div>
 
@@ -219,6 +224,8 @@
 
       <p>© 2026 LinguaHub · <a href="#top">Нагору</a></p>
     </footer>
+    <script src="js/utils.js"></script>
     <script src="js/feedback.js"></script>
+    <script src="js/feedback-page.js"></script>
   </body>
 </html>
