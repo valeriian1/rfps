@@ -97,14 +97,14 @@ function runFeedbackTests() {
   initialUsers.forEach(user => registry.addUser(user));
 
   logTable("Початковий список користувачів зворотного зв'язку:", registry.getUsers());
-  logTable("Користувачі за травень (місяць 5) о 14:30:", registry.getUsersByMonthAndTime(5, "14:30"));
+  logTable("Користувачі за травень о 14:30:", registry.getUsersByMonthAndTime(5, "14:30"));
   logTable("Користувач з мінімальним віком:", [registry.getUserWithMinAge()]);
 
   const userClasses = registry.classifyUsers();
   userClasses.forEach(({ title, users }) => logTable(`${title}:`, users));
   logTable("Кількість користувачів у кожному класі:", userClasses.map(({ title, count }) => ({ title, count })));
 
-  logTable("Відсортовані за email (зростання):", registry.sortByEmailAsc());
+  logTable("Відсортовані за email:", registry.sortByEmailAsc());
 }
 
 runFeedbackTests();
