@@ -190,7 +190,8 @@ function runTopicsTests() {
     name: "Irregular Verbs",
     author: "Богдан Шевчук"
   };
-  logTable("Додавання неповної теми:", addTopic(topics, incompleteTopic));
+  const topicsWithIncomplete = addTopic(topics, incompleteTopic);
+  logTable("Додавання неповної теми:", topicsWithIncomplete);
 
   const completeTopic = {
     id: 12,
@@ -202,7 +203,7 @@ function runTopicsTests() {
     durationHours: 0,
     durationMinutes: 50
   };
-  logTable("Додавання повної теми:", addTopic(topics, completeTopic));
+  logTable("Додавання повної теми:", addTopic(topicsWithIncomplete, completeTopic));
 
   logTable(
     `Одночасне вивчення (<= ${MAX_TOPICS_WITHOUT_SLOWDOWN} тем):`,
