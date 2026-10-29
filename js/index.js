@@ -4,9 +4,7 @@ const VISIBILITY_STEPS = 10;
 
 const NIGHT_START_HOUR = 21;
 const NIGHT_END_HOUR = 6;
-const TRANSPARENT_COLOR = "rgba(0, 0, 0, 0)";
-const NIGHT_DARKEN_CLASS = "night-darken";
-const HOVER_EVENTS = ["mouseover", "mouseout"];
+const NIGHT_CLASS = "is-night";
 
 function getVisibleShare(entry) {
   const visibleHeight = entry.intersectionRect.height;
@@ -54,44 +52,8 @@ function isNightTime(date) {
   return hour >= NIGHT_START_HOUR || hour < NIGHT_END_HOUR;
 }
 
-function hasBackgroundColor(element) {
-  return getComputedStyle(element).backgroundColor !== TRANSPARENT_COLOR;
-}
-
-function isBackgroundTransitioning(element) {
-  return element.getAnimations().some(animation => animation.transitionProperty === "background-color");
-}
-
-function updateNightBackground(element) {
-  const needsDarkening = isBackgroundTransitioning(element) || hasBackgroundColor(element);
-  element.classList.toggle(NIGHT_DARKEN_CLASS, needsDarkening);
-}
-
-function updateNightBackgroundWithAncestors(element) {
-  for (let current = element; current; current = current.parentElement) {
-    updateNightBackground(current);
-  }
-}
-
 function applyNightBackground(date) {
-  if (!isNightTime(date)) {
-    return;
-  }
-
-  [document.body, ...document.body.querySelectorAll("*")].forEach(updateNightBackground);
-
-  HOVER_EVENTS.forEach(eventType =>
-    document.addEventListener(eventType, event => {
-      updateNightBackgroundWithAncestors(event.target);
-      updateNightBackgroundWithAncestors(event.relatedTarget);
-    })
-  );
-
-  document.addEventListener("transitionend", event => {
-    if (event.propertyName === "background-color") {
-      updateNightBackground(event.target);
-    }
-  });
+  document.documentElement.classList.toggle(NIGHT_CLASS, isNightTime(date));
 }
 
 initGoldenRulesModal();

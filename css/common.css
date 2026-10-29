@@ -9,6 +9,20 @@
   --color-accent-border: #e0d6ec;
   --color-accent-focus: color-mix(in srgb, var(--color-accent) 15%, transparent);
   --color-accent-shadow: color-mix(in srgb, var(--color-accent) 25%, transparent);
+  --color-surface: white;
+  --color-line: #e5e5e5;
+  --color-row-stripe: #f9f7fc;
+  --color-row-hover: #f1ecf7;
+
+  --night-shade: 0%;
+  --surface-page: color-mix(in srgb, var(--color-bg), black var(--night-shade));
+  --surface: color-mix(in srgb, var(--color-surface), black var(--night-shade));
+  --surface-accent: color-mix(in srgb, var(--color-accent), black var(--night-shade));
+  --surface-accent-soft: color-mix(in srgb, var(--color-accent-soft), black var(--night-shade));
+  --surface-lime: color-mix(in srgb, var(--color-lime), black var(--night-shade));
+  --surface-line: color-mix(in srgb, var(--color-line), black var(--night-shade));
+  --surface-row-stripe: color-mix(in srgb, var(--color-row-stripe), black var(--night-shade));
+  --surface-row-hover: color-mix(in srgb, var(--color-row-hover), black var(--night-shade));
   --font-heading: 'Montserrat', sans-serif;
   --font-body: 'Nunito', sans-serif;
 }
@@ -20,7 +34,7 @@
 }
 
 body {
-  background-color: var(--color-bg);
+  background-color: var(--surface-page);
   color: var(--color-text);
   font-family: var(--font-body);
   line-height: 1.65;
@@ -28,7 +42,7 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-lime);
+  background-color: var(--surface-lime);
   color: var(--color-accent);
 }
 
@@ -56,7 +70,7 @@ a[href*="tel"] {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: var(--color-accent);
+  background-color: var(--surface-accent);
   color: white;
   padding: 0.85rem 2rem;
   display: flow-root;
@@ -117,9 +131,9 @@ nav > ul > li > a:hover {
 .btn {
   display: inline-block;
   padding: 0.55rem 1.4rem;
-  background-color: var(--color-accent);
+  background-color: var(--surface-accent);
   color: white;
-  border: 1px solid var(--color-accent);
+  border: 1px solid var(--surface-accent);
   border-radius: 50px;
   cursor: pointer;
   font-family: var(--font-heading);
@@ -132,19 +146,19 @@ nav > ul > li > a:hover {
 .btn:hover {
   background-color: transparent;
   color: var(--color-accent);
-  border-color: var(--color-accent);
+  border-color: var(--surface-accent);
 }
 
 .site-header .btn {
-  background-color: white;
+  background-color: var(--surface);
   color: var(--color-accent);
-  border: 1px solid white;
+  border: 1px solid var(--surface);
 }
 
 .site-header .btn:hover {
   background-color: transparent;
   color: white;
-  border-color: white;
+  border-color: var(--surface);
 }
 
 .header-actions .btn {
@@ -165,8 +179,8 @@ nav > ul > li > a:hover {
   width: 100%;
   margin: 3.5rem 0 0;
   padding: 3rem 2rem;
-  background-color: white;
-  border-top: 1px solid #e5e5e5;
+  background-color: var(--surface);
+  border-top: 1px solid var(--surface-line);
 }
 
 #contacts address {
@@ -214,7 +228,7 @@ textarea:focus {
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: white;
+  background-color: var(--surface);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
@@ -229,7 +243,7 @@ caption {
 }
 
 thead {
-  background-color: var(--color-accent);
+  background-color: var(--surface-accent);
   color: white;
 }
 
@@ -237,20 +251,20 @@ th {
   padding: 0.95rem 1.15rem;
   text-align: left;
   font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid color-mix(in srgb, var(--surface) 15%, transparent);
 }
 
 td {
   padding: 0.85rem 1.15rem;
-  border: 1px solid #e8e8e8;
+  border: 1px solid var(--surface-line);
 }
 
 tbody tr:nth-child(even) {
-  background-color: #f9f7fc;
+  background-color: var(--surface-row-stripe);
 }
 
 tbody tr:hover {
-  background-color: #f1ecf7;
+  background-color: var(--surface-row-hover);
 }
 
 @media (max-width: 900px) {
