@@ -22,7 +22,7 @@ main h1 {
   position: sticky;
   top: 90px;
   background-color: white;
-  border: 1px solid #e0d6ec;
+  border: 1px solid var(--color-accent-border);
   border-radius: 12px;
   padding: 1.25rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
@@ -95,20 +95,7 @@ main h1 {
 }
 
 .topic-search input {
-  width: 100%;
   max-width: 28rem;
-  padding: 0.7rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-family: var(--font-body);
-  font-size: 1rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.topic-search input:focus {
-  border-color: var(--color-accent);
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(74, 20, 140, 0.15);
 }
 
 .topics-list {

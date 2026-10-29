@@ -5,6 +5,10 @@
   --color-text: rgb(31, 27, 36);
   --color-accent: #4A148C;
   --color-lime: #E7FE55;
+  --color-accent-soft: #f4eff9;
+  --color-accent-border: #e0d6ec;
+  --color-accent-focus: color-mix(in srgb, var(--color-accent) 15%, transparent);
+  --color-accent-shadow: color-mix(in srgb, var(--color-accent) 25%, transparent);
   --font-heading: 'Montserrat', sans-serif;
   --font-body: 'Nunito', sans-serif;
 }
@@ -177,6 +181,34 @@ nav > ul > li > a:hover {
   gap: 1.5rem;
   margin: 1.25rem 0;
   padding: 0;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background-color: #fafafa;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--color-accent);
+  background-color: white;
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-accent-focus);
 }
 
 table {

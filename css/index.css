@@ -118,7 +118,7 @@ table {
 }
 
 tfoot {
-  background-color: #f4eff9;
+  background-color: var(--color-accent-soft);
   font-weight: 700;
   color: var(--color-accent);
 }

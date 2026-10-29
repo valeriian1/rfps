@@ -1,3 +1,5 @@
+const OPEN_CLASS = "is-open";
+
 function normalizeText(text) {
   return text.trim().toLocaleLowerCase(LOCALE);
 }
@@ -20,8 +22,8 @@ function initAccordion() {
 
   accordionItems.forEach(item => {
     item.querySelector(".accordion-trigger").addEventListener("click", () => {
-      const willOpen = !item.classList.contains("is-open");
-      accordionItems.forEach(otherItem => otherItem.classList.toggle("is-open", otherItem === item && willOpen));
+      const willOpen = !item.classList.contains(OPEN_CLASS);
+      accordionItems.forEach(otherItem => otherItem.classList.toggle(OPEN_CLASS, otherItem === item && willOpen));
     });
   });
 }

@@ -4,7 +4,7 @@ const VISIBILITY_STEPS = 10;
 
 const NIGHT_START_HOUR = 21;
 const NIGHT_END_HOUR = 6;
-const TRANSPARENT_COLORS = ["transparent", "rgba(0, 0, 0, 0)"];
+const TRANSPARENT_COLOR = "rgba(0, 0, 0, 0)";
 const NIGHT_DARKEN_CLASS = "night-darken";
 const HOVER_EVENTS = ["mouseover", "mouseout"];
 
@@ -55,7 +55,7 @@ function isNightTime(date) {
 }
 
 function hasBackgroundColor(element) {
-  return !TRANSPARENT_COLORS.includes(getComputedStyle(element).backgroundColor);
+  return getComputedStyle(element).backgroundColor !== TRANSPARENT_COLOR;
 }
 
 function isBackgroundTransitioning(element) {
@@ -73,8 +73,8 @@ function updateNightBackgroundWithAncestors(element) {
   }
 }
 
-function applyNightBackground() {
-  if (!isNightTime(new Date())) {
+function applyNightBackground(date) {
+  if (!isNightTime(date)) {
     return;
   }
 
@@ -95,4 +95,4 @@ function applyNightBackground() {
 }
 
 initGoldenRulesModal();
-applyNightBackground();
+applyNightBackground(new Date());

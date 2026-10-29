@@ -115,32 +115,6 @@ small {
   line-height: 1.4;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="number"],
-select,
-textarea {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-family: var(--font-body);
-  font-size: 1rem;
-  background-color: #fafafa;
-  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="number"]:focus,
-select:focus,
-textarea:focus {
-  border-color: var(--color-accent);
-  background-color: white;
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(74, 20, 140, 0.15);
-}
-
 ::placeholder {
   color: #aaa;
   font-style: italic;
@@ -185,10 +159,10 @@ textarea {
 }
 
 .details-field.is-hovered textarea {
-  background-color: #f4eff9;
+  background-color: var(--color-accent-soft);
   border-color: var(--color-accent);
   outline: 2px solid var(--color-accent);
-  box-shadow: 0 0.5rem 1.25rem rgba(74, 20, 140, 0.25);
+  box-shadow: 0 0.5rem 1.25rem var(--color-accent-shadow);
 }
 
 .tooltip {
