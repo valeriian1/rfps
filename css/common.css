@@ -11,6 +11,7 @@
   --color-accent-shadow: color-mix(in srgb, var(--color-accent) 25%, transparent);
   --color-surface: white;
   --color-line: #e5e5e5;
+  --color-field-border: #ccc;
   --color-row-stripe: #f9f7fc;
   --color-row-hover: #f1ecf7;
 
@@ -205,7 +206,7 @@ select,
 textarea {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-field-border);
   border-radius: 8px;
   font-family: var(--font-body);
   font-size: 1rem;
