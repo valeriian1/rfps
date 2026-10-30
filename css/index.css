@@ -244,9 +244,6 @@ table + p a:hover {
   backdrop-filter: blur(3px);
 }
 
-.rules-dialog h2::before {
-  content: "🏆 ";
-}
 
 .rules-dialog ol {
   padding-left: 1.5rem;
