@@ -21,6 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,700&amp;family=Nunito:wght@400;700&amp;display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/index.css" />
+    <script src="js/navigation.js" defer></script>
   </head>
   <body>
     <header class="site-header" id="top">
@@ -29,17 +30,22 @@
       </a>
       <p><b>LinguaHub</b></p>
 
-      <nav aria-label="Головне меню сайту">
-        <ul>
-          <li><a href="index.html">Головна</a></li>
-          <li><a href="topics.html">Навчальні теми</a></li>
-          <li><a href="feedback.html">Зворотній зв'язок</a></li>
-        </ul>
-      </nav>
+      <button type="button" class="menu-toggle" aria-controls="header-menu" aria-expanded="false" aria-label="Відкрити меню">
+        <span class="menu-toggle-icon" aria-hidden="true"></span>
+      </button>
+      <div class="header-menu" id="header-menu">
+        <nav aria-label="Головне меню сайту">
+          <ul>
+            <li><a href="index.html">Головна</a></li>
+            <li><a href="topics.html">Навчальні теми</a></li>
+            <li><a href="feedback.html">Зворотній зв'язок</a></li>
+          </ul>
+        </nav>
 
-      <div class="header-actions">
-        <button type="button" class="btn">Перейти у власний кабінет</button>
-        <button type="button" class="btn">Зареєструватись</button>
+        <div class="header-actions">
+          <button type="button" class="btn">Перейти у власний кабінет</button>
+          <button type="button" class="btn">Зареєструватись</button>
+        </div>
       </div>
     </header>
 

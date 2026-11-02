@@ -157,6 +157,73 @@ nav > ul > li > a:hover {
   line-height: 2.625rem;
 }
 
+.header-menu {
+  display: contents;
+}
+
+.header-menu[hidden] {
+  display: none;
+}
+
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-left: auto;
+  padding: 0.65rem;
+  color: white;
+  background: transparent;
+  border: 1px solid var(--surface);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.menu-toggle:focus-visible {
+  outline-color: white;
+}
+
+.menu-toggle-icon,
+.menu-toggle-icon::before,
+.menu-toggle-icon::after {
+  width: 1.25rem;
+  height: 2px;
+  background: currentColor;
+}
+
+.menu-toggle-icon {
+  position: relative;
+}
+
+.menu-toggle-icon::before,
+.menu-toggle-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  transition: transform 0.2s;
+}
+
+.menu-toggle-icon::before {
+  transform: translateY(-0.4rem);
+}
+
+.menu-toggle-icon::after {
+  transform: translateY(0.4rem);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-icon {
+  background: transparent;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-icon::before {
+  transform: rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-icon::after {
+  transform: rotate(-45deg);
+}
+
 .btn {
   display: inline-block;
   padding: 0.55rem 1.4rem;
@@ -380,7 +447,7 @@ tbody tr:hover {
 
 @media (max-width: 38.75rem) {
   .site-header {
-    justify-content: center;
+    justify-content: flex-start;
     gap: 0.75rem;
     padding: 0.75rem 1rem;
   }
@@ -396,6 +463,40 @@ tbody tr:hover {
 
   .site-header img {
     height: 2.125rem;
+  }
+
+  .site-header.has-menu .menu-toggle {
+    display: inline-flex;
+  }
+
+  .header-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    order: 3;
+    width: 100%;
+    padding-top: 0.75rem;
+  }
+
+  .header-menu nav {
+    order: 0;
+    margin: 0;
+  }
+
+  .header-menu nav ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.25rem;
+  }
+
+  .header-menu nav a {
+    display: block;
+    padding: 0.55rem 0;
+  }
+
+  .header-menu .header-actions {
+    order: 1;
+    margin-left: 0;
   }
 
   nav > ul {
@@ -434,6 +535,10 @@ tbody tr:hover {
 }
 
 @media (max-width: 20rem) {
+  .site-header.has-menu > p {
+    display: none;
+  }
+
   .container, #contacts, .site-header {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
