@@ -175,8 +175,7 @@ nav > ul > li > a:hover {
   padding: 0.65rem;
   color: white;
   background: transparent;
-  border: 1px solid var(--surface);
-  border-radius: 0.5rem;
+  border: none;
   cursor: pointer;
 }
 
@@ -507,12 +506,13 @@ tbody tr:hover {
   .header-actions {
     margin-left: 0;
     width: 100%;
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.45rem;
   }
 
   .header-actions .btn {
-    width: 100%;
+    flex: 1;
+    width: auto;
     text-align: center;
     padding: 0.5rem 0.85rem;
     font-size: 0.9rem;
