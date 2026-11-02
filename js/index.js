@@ -8,8 +8,9 @@ const NIGHT_CLASS = "is-night";
 
 function getVisibleShare(entry) {
   const visibleHeight = entry.intersectionRect.height;
-  const maxVisibleHeight = Math.min(entry.boundingClientRect.height, entry.rootBounds.height);
-  return visibleHeight / maxVisibleHeight;
+  const viewportHeight = entry.rootBounds?.height ?? document.documentElement.clientHeight;
+  const maxVisibleHeight = Math.min(entry.boundingClientRect.height, viewportHeight);
+  return maxVisibleHeight > 0 ? visibleHeight / maxVisibleHeight : 0;
 }
 
 function initGoldenRulesModal() {

@@ -20,10 +20,16 @@ function initTopicSearch() {
 function initAccordion() {
   const accordionItems = [...document.querySelectorAll(".accordion-item")];
 
+  function setExpanded(item, expanded) {
+    item.classList.toggle(OPEN_CLASS, expanded);
+    item.querySelector(".accordion-trigger").setAttribute("aria-expanded", String(expanded));
+  }
+
   accordionItems.forEach(item => {
+    setExpanded(item, false);
     item.querySelector(".accordion-trigger").addEventListener("click", () => {
       const willOpen = !item.classList.contains(OPEN_CLASS);
-      accordionItems.forEach(otherItem => otherItem.classList.toggle(OPEN_CLASS, otherItem === item && willOpen));
+      accordionItems.forEach(otherItem => setExpanded(otherItem, otherItem === item && willOpen));
     });
   });
 }
