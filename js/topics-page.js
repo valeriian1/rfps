@@ -6,7 +6,25 @@ function normalizeText(text) {
 
 function initTopicSearch() {
   const searchInput = document.getElementById("topic-search-input");
-  const topicCards = [...document.querySelectorAll(".topic-card")];
+  const topicCards = Array.from(document.getElementsByClassName("topic-card"));
+  const searchContainer = searchInput.closest(".topic-search");
+  let status = null;
+
+  function updateStatus(query) {
+    if (!query) {
+      if (status) searchContainer.removeChild(status);
+      status = null;
+      return;
+    }
+
+    const nextStatus = document.createElement("p");
+    nextStatus.className = "search-status";
+    const count = topicCards.filter(card => !card.hidden).length;
+    nextStatus.textContent = `Знайдено тем: ${count}`;
+    if (status) searchContainer.replaceChild(nextStatus, status);
+    else searchContainer.appendChild(nextStatus);
+    status = nextStatus;
+  }
 
   searchInput.addEventListener("input", () => {
     const query = normalizeText(searchInput.value);
@@ -14,6 +32,7 @@ function initTopicSearch() {
     topicCards.forEach(card => {
       card.hidden = !normalizeText(card.querySelector("h2").textContent).includes(query);
     });
+    updateStatus(query);
   });
 }
 

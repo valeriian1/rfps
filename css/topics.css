@@ -97,6 +97,12 @@ main h1 {
   margin-bottom: 0.4rem;
 }
 
+.search-status {
+  margin: 0.65rem 0 0;
+  font-size: 0.95rem;
+  color: var(--color-accent);
+}
+
 .search-field {
   position: relative;
   display: block;
