@@ -1,0 +1,9 @@
+.header-menu[hidden] {
+  display: contents;
+}
+
+@media (max-width: 38.75rem) {
+  .header-menu[hidden] {
+    display: flex;
+  }
+}

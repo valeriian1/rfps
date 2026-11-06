@@ -2,7 +2,7 @@ function initNavigation() {
   const header = document.querySelector(".site-header");
   const toggle = header.querySelector(".menu-toggle");
   const menu = header.querySelector(".header-menu");
-  let collapsible = false;
+  let collapsible = null;
 
   function setOpen(open) {
     menu.hidden = collapsible && !open;
