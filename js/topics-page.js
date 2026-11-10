@@ -1,7 +1,7 @@
 const OPEN_CLASS = "is-open";
 
 function normalizeText(text) {
-  return text.trim().toLocaleLowerCase(LOCALE);
+  return text.trim().toLocaleLowerCase(document.documentElement.lang);
 }
 
 function initTopicSearch() {

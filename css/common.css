@@ -161,6 +161,10 @@ nav > ul > li > a:hover {
   display: contents;
 }
 
+.header-action-short {
+  display: none;
+}
+
 .header-menu[hidden] {
   display: none;
 }
@@ -515,8 +519,18 @@ tbody tr:hover {
     flex: 1;
     width: auto;
     text-align: center;
-    padding: 0.5rem 0.85rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.35rem;
     font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  .header-action-full {
+    display: none;
+  }
+
+  .header-action-short {
+    display: inline;
   }
 
   .container {
@@ -536,6 +550,12 @@ tbody tr:hover {
 }
 
 @media (max-width: 20rem) {
+  .header-actions .btn {
+    flex-basis: auto;
+    padding-inline: 0.25rem;
+    font-size: 0.75rem;
+  }
+
   .site-header.has-menu > p {
     display: none;
   }
